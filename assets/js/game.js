@@ -1,3 +1,22 @@
+//function to set name 
+var getPlayerName = function () {
+    var name = "";
+
+    while (name === "" || name === null) {
+        name = prompt("What is your robot's name?");
+
+    }
+
+    console.log("Your robot's name is " + name);
+    return name;
+};
+
+/* GAME INFORMATION / VARIABLES */
+var playerInfo = {
+    name: getPlayerName(),
+}
+
+
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
@@ -9,6 +28,7 @@ console.log(playerName, playerAttack, playerHealth);
 var enemyNames = ["roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
+
 
 var fight = function (enemyName) {
     while (playerHealth > 0 && enemyHealth > 0) {
@@ -88,6 +108,8 @@ var startGame = function () {
     for (var i = 0; i < enemyNames.length; i++) {
         if (playerHealth > 0) {
             window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
+            window.alert('Welcome to Robot Gladiators! Round ' + (i + 1));
+
 
             var pickedEnemyName = enemyNames[i];
 
