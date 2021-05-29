@@ -39,7 +39,7 @@ var fightOrSkip = function () {
 }
 
 // fight function (now with parameter for enemy's object holding name, health, and attack values)
-var fight = function(enemy) {
+var fight = function (enemy) {
   // keep track of who goes first
   var isPlayerTurn = true;
 
@@ -62,13 +62,13 @@ var fight = function(enemy) {
       enemy.health = Math.max(0, enemy.health - damage);
       console.log(
         playerInfo.name +
-          " attacked " +
-          enemy.name +
-          ". " +
-          enemy.name +
-          " now has " +
-          enemy.health +
-          " health remaining."
+        " attacked " +
+        enemy.name +
+        ". " +
+        enemy.name +
+        " now has " +
+        enemy.health +
+        " health remaining."
       );
 
       // check enemy's health
@@ -91,13 +91,13 @@ var fight = function(enemy) {
       playerInfo.health = Math.max(0, playerInfo.health - damage);
       console.log(
         enemy.name +
-          " attacked " +
-          playerInfo.name +
-          ". " +
-          playerInfo.name +
-          " now has " +
-          playerInfo.health +
-          " health remaining."
+        " attacked " +
+        playerInfo.name +
+        ". " +
+        playerInfo.name +
+        " now has " +
+        playerInfo.health +
+        " health remaining."
       );
 
       // check player's health
@@ -157,24 +157,33 @@ var startGame = function () {
   endGame();
 };
 
-// function to end the entire game
-var endGame = function () {
+var endGame = function() {
   window.alert("The game has now ended. Let's see how you did!");
 
-  // if player is still alive, player wins!
-  if (playerInfo.health > 0) {
-    window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + '.');
-  } else {
-    window.alert("You've lost your robot in battle!");
+  // check localStorage for high score, if it's not there, use 0
+  var highScore = localStorage.getItem("highscore");
+  if (highScore === null) {
+    highScore = 0;
+  }
+  // if player has more money than the high score, player has new high score!
+  if (playerInfo.money > highScore) {
+    localStorage.setItem("highscore", playerInfo.money);
+    localStorage.setItem("name", playerInfo.name);
+
+    alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+  } 
+  else {
+    alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
   }
 
   // ask player if they'd like to play again
-  var playAgainConfirm = window.confirm('Would you like to play again?');
+  var playAgainConfirm = window.confirm("Would you like to play again?");
 
   if (playAgainConfirm) {
     startGame();
-  } else {
-    window.alert('Thank you for playing Robot Gladiators! Come back soon!');
+  } 
+  else {
+    window.alert("Thank you for playing Robot Gladiators! Come back soon!");
   }
 };
 
